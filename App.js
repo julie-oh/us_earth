@@ -10,8 +10,11 @@ import {
   StyleSheet,
   Text,
   View,
-  NavigatorIOS
+  NavigatorIOS,
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -22,21 +25,28 @@ const instructions = Platform.select({
 
 type Props = {};
 class SearchPage extends Component<Props> {
+  _handleBackPress() {
+    this.props.navigator.pop();
+  }
+
+  _handleNextPress(nextRoute) {
+    this.props.navigator.push(nextRoute);
+  }
   render() {
+    const nextRoute = {
+      component: SearchPage,
+      title: 'It\'s NextPage',
+      passProps: { myProp: 'bar'}
+    }
     return (
       <View>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-        <Text style={styles.test}>
-          Dan & Julie
-        </Text>
+        <ScrollView>
+          <TouchableHighlight onPress={() => this._handleNextPress(nextRoute)}>
+            <Text style={styles.mainPage}>
+              {"\nhey,\nyou can \nclick here"}
+            </Text>
+          </TouchableHighlight>
+        </ScrollView>
       </View>
     );
   }
@@ -58,18 +68,11 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     // alignItems: 'center',
     // backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  mainPage: {
+    fontSize: 60,
+  }
 });
