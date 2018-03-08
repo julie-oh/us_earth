@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import ChatRoom from './ChatRoom';
 import {
   Platform,
   StyleSheet,
@@ -32,18 +33,19 @@ class SearchPage extends Component<Props> {
   _handleNextPress(nextRoute) {
     this.props.navigator.push(nextRoute);
   }
+
   render() {
     const nextRoute = {
-      component: SearchPage,
+      component: ChatRoom,
       title: 'It\'s NextPage',
       passProps: { myProp: 'bar'}
-    }
+    };
     return (
       <View>
         <ScrollView>
           <TouchableHighlight onPress={() => this._handleNextPress(nextRoute)}>
             <Text style={styles.mainPage}>
-              {"\nhey,\nyou can \nclick here"}
+              {"hey,\nyou can \nclick here"}
             </Text>
           </TouchableHighlight>
         </ScrollView>
@@ -67,12 +69,11 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 2,
     // alignItems: 'center',
     // backgroundColor: '#F5FCFF',
   },
   mainPage: {
-    fontSize: 60,
+    fontSize: 40,
   }
 });
